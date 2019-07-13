@@ -20,3 +20,19 @@ except socket.error as e:
 conn, address = s.accept()
 print(f"Connection has been established with {address}")
 
+name = input("Enter your name: ")
+print("Enter meaasge")
+
+def send_msg():
+	while True:
+		msg = input()
+		s_msg = name + '> ' + msg
+		conn.send(str.encode(s_msg))
+		receive_msg()
+		
+def receive_msg():
+	while True:
+		received_msg = conn.recv(2048)
+		print(received_msg.decode('utf-8'))
+
+send_msg()

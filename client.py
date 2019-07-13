@@ -7,3 +7,19 @@ port =				#specify the same port number assigned to the port in server.py
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.connect((host, port))
 
+name = input("Enter your name:")
+print("Enter message")
+
+def send_msg():
+	while True:
+		msg = input()
+		s_msg = name + '> ' + msg
+		s.send(str.encode(s_msg))
+
+def receive_msg():
+	while True:
+		received_msg = s.recv(2048)
+		print(received_msg.decode('utf-8'))
+		send_msg()
+
+receive_msg()

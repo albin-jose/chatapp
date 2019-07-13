@@ -28,11 +28,19 @@ def send_msg():
 		msg = input()
 		s_msg = name + '> ' + msg
 		conn.send(str.encode(s_msg))
-		receive_msg()
-		
+
+
 def receive_msg():
 	while True:
 		received_msg = conn.recv(2048)
 		print(received_msg.decode('utf-8'))
 
-send_msg()
+
+send_msg_thread = threading.Thread(target = send_msg, daemon = True)
+receive_msg_thread = threading.Thread(target = receive_msg, daemon = True)
+
+send_msg_thread.start()
+receive_msg_thread.start()
+
+send_msg_thread.join()
+receive_msg_thread.join()

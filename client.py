@@ -20,6 +20,13 @@ def receive_msg():
 	while True:
 		received_msg = s.recv(2048)
 		print(received_msg.decode('utf-8'))
-		send_msg()
 
-receive_msg()
+
+send_msg_thread = threading.Thread(target = send_msg, daemon = True)
+receive_msg_thread = threading.Thread(target = receive_msg, daemon = True)
+
+send_msg_thread.start()
+receive_msg_thread.start()
+
+send_msg_thread.join()
+receive_msg_thread.join()

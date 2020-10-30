@@ -1,6 +1,8 @@
 import socket
 import threading
 
+#This is a test
+
 host = 				#give the host address of the system where server.py is running
 port =				#specify the same port number assigned to the port in server.py
 
